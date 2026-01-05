@@ -12,7 +12,6 @@ async function addUser(req, res) {
     }
 }
 
-
 export {
     addUser
 }
