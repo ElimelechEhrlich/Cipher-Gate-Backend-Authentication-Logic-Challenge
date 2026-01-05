@@ -62,7 +62,7 @@ async function checkTrap(req, res, next) {
             const sortedArray = (req.body.message).toSorted((a, b) => a - b)
             const isArraysEqual = checkArraysEqual(sortedArray, req.body.message)
             if (isArraysEqual) next();
-            else res.status(400).json({error: "trap!!!"})
+            else res.status(400).json(-1)
         }
         else res.sendStatus(409)
     } catch (error) {
