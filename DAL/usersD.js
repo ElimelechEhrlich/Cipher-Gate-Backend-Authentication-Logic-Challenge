@@ -7,7 +7,7 @@ export async function insertUser( username, password_hash ) {
 }
 
 export async function getUser( username ) {
-    const {data, error} = await supabase.from("users_bcrypt").select("*").eq("username", username)
+    const {data, error} = await supabase.from("users_bcrypt").select("*").eq("username", username).single()
     if (error) throw error;
     return data
 }

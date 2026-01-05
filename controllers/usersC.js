@@ -1,5 +1,5 @@
-import { hash } from "../bcrypt.js";
-import { insertUser } from "../DAL/usersD.js";
+import { compare, hash } from "../bcrypt.js";
+import { getUser, insertUser } from "../DAL/usersD.js";
 
 async function addUser(req, res) {
     try {
@@ -12,6 +12,33 @@ async function addUser(req, res) {
     }
 }
 
+async function isVerifyUser(req, res) {
+    try {
+        res.status(201).json("Verified")
+    } catch (error) {
+        console.error({err: error.message})
+        res.status(500).json({err: error.message})
+    }
+} 
+
+async function getSum(req, res) {
+    try {
+        const sum = (req.body.message).reduce((
+            (sum, num) => {
+                if (typeof num === "number") sum += num;
+                else res.status(401).json({err: "value is not numeric"});
+                return sum
+            }),0)
+        res.status(201).json({sum: sum})
+    } catch (error) {
+        console.error({err: error.message})
+        res.status(500).json({err: error.message})
+    }
+}
+
+
 export {
-    addUser
+    addUser,
+    isVerifyUser,
+    getSum
 }
